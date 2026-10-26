@@ -1,9 +1,19 @@
+//IMPORTANT!!
+import { ArrowGameRunner } from './arrow_game_runner.js';
+//import { class } from 'path/to/your/file.js'; <- copy and paste me
+
+let currentScreen = "home";
+let game_1_started = false;
+let game_2_started = false;
+let game_3_started = false;
+let game_4_started = false;
+let arrow_game_runner;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
+  arrow_game_runner = new ArrowGameRunner();
 }
-
-let currentScreen = "home";
 
 function draw() {
   if (currentScreen === "home") {
@@ -28,7 +38,6 @@ function draw() {
   }
 }
 
-
 function drawHomeScreen() {
   background(80, 80, 150);
   fill(255);
@@ -37,8 +46,6 @@ function drawHomeScreen() {
   rect(width / 4, height / 2, width / 2, height / 8);
   rect(width / 4, height / 1.5, width / 2, height / 8);
 }
-
-
 
 function drawScreen1() {
   background(200, 100, 100);
@@ -53,5 +60,23 @@ function drawScreen3() {
 }
 
 function drawScreen4() {
-  background(200, 200, 100);
+  if (game_4_started == false) {
+    game_4_started = true;
+    arrow_game_runner.start_game();
+  }
+  else {
+    arrow_game_runner.draw_game();
+  }
+  
 }
+
+function keyPressed() {
+  if (game_4_started == true) {
+    arrow_game_runner.check_hit(keyCode);
+  }
+}
+
+//IMPORTANT!! Leave everything below as it is
+window.setup = setup;
+window.draw = draw;
+window.keyPressed = keyPressed;
