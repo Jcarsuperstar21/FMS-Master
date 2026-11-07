@@ -1,9 +1,24 @@
+//IMPORTANT!!
+import { ArrowGameRunner } from './arrow_game_runner.js';
+//import { class } from 'path/to/your/file.js'; <- copy and paste me
+
+let currentScreen = "home";
+let game_1_started = false;
+let game_2_started = false;
+let game_3_started = false;
+let game_4_started = false;
+let arrow_game_runner;
+let game_4_arrow_img;
+
+function preload() {
+  game_4_arrow_img = loadImage('/arrow_game_assets/arrow_left.png');
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
+  arrow_game_runner = new ArrowGameRunner(game_4_arrow_img);
 }
-
-let currentScreen = "home";
 
 function draw() {
   if (currentScreen === "home") {
@@ -28,7 +43,6 @@ function draw() {
   }
 }
 
-
 function drawHomeScreen() {
   background(80, 80, 150);
   fill(255);
@@ -36,9 +50,19 @@ function drawHomeScreen() {
   rect(width / 4, height / 3, width / 2, height / 8);
   rect(width / 4, height / 2, width / 2, height / 8);
   rect(width / 4, height / 1.5, width / 2, height / 8);
+  
+  //----------------Text for Arrow Game (#4)----------------
+  textAlign(CENTER, CENTER);
+  fill('black');
+  textSize(32);
+  text("Arrow Game", width / 4, height / 1.5, width / 2, height / 8);
+  //--------------------------------------------------------
+
+  textAlign(CENTER, CENTER);
+  fill('black');
+  textSize(64);
+  text("Demo", width / 4, height / 6 - 100, width / 2, height / 8);
 }
-
-
 
 function drawScreen1() {
   background(200, 100, 100);
@@ -53,5 +77,53 @@ function drawScreen3() {
 }
 
 function drawScreen4() {
-  background(200, 200, 100);
+  if (game_4_started == false) {
+    game_4_started = true;
+    arrow_game_runner.start_game();
+  }
+  else if (!arrow_game_runner.game_is_over()) {
+    arrow_game_runner.play_game();
+  }
+  else if (arrow_game_runner.game_is_over()) {
+    arrow_game_runner.end_game();
+  }
+  
 }
+
+function keyPressed() {
+  //----------------Logic for Arrow Game (#4)----------------
+  if (game_4_started == true && !arrow_game_runner.game_is_over()) {
+    arrow_game_runner.get_hit_type(keyCode);
+  }
+  //---------------------------------------------------------
+
+
+}
+
+function mouseClicked() {
+  //----------------Logic for Arrow Game (#4)----------------
+  if (game_4_started && arrow_game_runner.game_is_over()) {
+    if (arrow_game_runner.retry_button.mouse_is_hovering()) {
+      arrow_game_runner.start_game();
+    }
+    if (arrow_game_runner.menu_button.mouse_is_hovering()) {
+      currentScreen = "home";
+      game_4_started = false;
+    }
+  }
+  //---------------------------------------------------------
+
+
+}
+
+/*IMPORTANT!!
+  Leave everything below as it is. We've set up our modules in a way
+  that this file acts as a runner, so p5js needs to 'see' these functions.
+  The other alternative was to write our modules in instance mode, which
+  we decided against in favor of easier-to-write modules.
+*/
+window.preload = preload;
+window.setup = setup;
+window.draw = draw;
+window.keyPressed = keyPressed;
+window.mouseClicked = mouseClicked;
