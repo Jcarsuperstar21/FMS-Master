@@ -1,6 +1,7 @@
 //IMPORTANT!!
 import { ArrowGameRunner } from './arrow_game_runner.js';
 import { LetterTraceRunner } from './letter_trace_runner.js';
+import { Keyboard } from './keyboard.js';
 //import { class } from 'path/to/your/file.js'; <- copy and paste me
 
 let currentScreen = "home";
@@ -8,21 +9,25 @@ let game_1_started = false;
 let game_2_started = false;
 let game_3_started = false;
 let game_4_started = false;
+
 let arrow_game_runner;
 let game_4_arrow_img;
 
 let letter_trace_runner;
 let bufferFrameCount = 0;
 
+let keyboard_game_runner;
+
 function preload() {
   game_4_arrow_img = loadImage('/arrow_game_assets/arrow_left.png');
   letter_trace_runner = new LetterTraceRunner();
+  arrow_game_runner = new ArrowGameRunner(game_4_arrow_img);
+  keyboard_game_runner = new Keyboard();
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
-  arrow_game_runner = new ArrowGameRunner(game_4_arrow_img);
 }
 
 function draw() {
@@ -53,26 +58,34 @@ function draw() {
 function drawHomeScreen() {
   background(80, 80, 150);
   fill(255);
-  rect(width / 4, height / 6, width / 2, height / 8);
-  rect(width / 4, height / 3, width / 2, height / 8);
-  rect(width / 4, height / 2, width / 2, height / 8);
-  rect(width / 4, height / 1.5, width / 2, height / 8);
+  rect(width / 4, height / 6, width / 2, height / 8);   //Game #1 button
+  rect(width / 4, height / 3, width / 2, height / 8);   //Game #2 button
+  rect(width / 4, height / 2, width / 2, height / 8);   //Game #3 button
+  rect(width / 4, height / 1.5, width / 2, height / 8); //Game #4 button
   
-  //----------------Text for Arrow Game (#4)----------------
-  textAlign(CENTER, CENTER);
-  fill('black');
-  textSize(32);
-  text("Arrow Game", width / 4, height / 1.5, width / 2, height / 8);
-  //--------------------------------------------------------
-
+  //Text for the Main Menu title
   textAlign(CENTER, CENTER);
   fill('black');
   textSize(64);
   text("Demo", width / 4, height / 6 - 100, width / 2, height / 8);
+  
+  //Text for Jack's Game (#4)
+  textAlign(CENTER, CENTER);
+  fill('black');
+  textSize(32);
+  text("Letter Tracing", width / 4, height / 2, width / 2, height / 8);
+
+  //Text for Pranay's Game (#4)
+  textAlign(CENTER, CENTER);
+  fill('black');
+  textSize(32);
+  text("Arrow Game", width / 4, height / 1.5, width / 2, height / 8);
+
 }
 
 function drawScreen1() {
   background(200, 100, 100);
+  keyboard_game_runner.drawKeyboard();
 }
 
 function drawScreen2() {
@@ -119,12 +132,15 @@ function keyPressed() {
   else if (currentScreen === "screen3") {
     letter_trace_runner.debugSkip(keyCode);
   }
+  else if (currentScreen === "screen1") {
+    handleKeyPress(keyCode);
+  }
 
 
 }
 
 function mouseClicked() {
-  //----------------Logic for Arrow Game (#4)----------------
+  //Logic for Pranay's Game (#4)
   if (game_4_started && arrow_game_runner.game_is_over()) {
     if (arrow_game_runner.retry_button.mouse_is_hovering()) {
       arrow_game_runner.start_game();
@@ -134,7 +150,6 @@ function mouseClicked() {
       game_4_started = false;
     }
   }
-  //---------------------------------------------------------
 
 
 }
