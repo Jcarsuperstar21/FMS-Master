@@ -1,93 +1,206 @@
-let circleMatched = false;
-let rectMatched = false;
+class MatchUpGameRunner {
+  constructor() {
+    createCanvas(1920, 1080);
+    this.shapes = [
+  { type: "circle", color: [0, 190, 180], startX: 150, startY: 150 },
+  { type: "rect", color: [250, 80, 150], startX: 600, startY: 150 },
+  { type: "triangle", color: [200, 10, 90], startX: 150, startY: 550 },
+  { type: "star", color: [150, 70, 200], startX: 600, startY: 550 },
+  { type: "diamond", color: [250, 50, 150], startX: 150, startY: 950 },
+  { type: "hexagon", color: [100, 200, 250], startX: 600, startY: 950 }
+];
 
-let circleStartX = 100;
-let circleStartY = 100;
+// Random target positions
+let targetPositions = [
+  { x: 1200, y: 90 },
+  { x: 1700, y: 250 },
+  { x: 1300, y: 450 },
+  { x: 1500, y: 650 },
+  { x: 1400, y: 850 },
+  { x: 1600, y: 950 }
+];
 
-let rectStartX = 200;
-let rectStartY = 50;
-
-let circleX = 100;
-let circleY = 100;
-
-let rectX = 200;
-let rectY = 50;
-
-let selected = " ";
-let offsetX = 0;
-let offsetY = 0;
-
-function setup() {
-  createCanvas(1080, 1920);
+// Shuffle target positions
+for (let i = targetPositions.length - 1; i > 0; i--) {
+  let j = floor(random(i + 1));
+  [targetPositions[i], targetPositions[j]] =
+    [targetPositions[j], targetPositions[i]];
 }
 
-function draw() {
-  background(245);
-  strokeWeight(10);
-// target
-  fill(220);
-  circle(1000, 100,100);
-// target
-  fill(220);
-  rect(950, 200, 100);
+// Assign randomized targets
+for (let i = 0; i < this.shapes.length; i++) {
+  this.shapes[i].targetX = targetPositions[i].x;
+  this.shapes[i].targetY = targetPositions[i].y;
 
-  line(540, 0, 540, 1920);
-  // draggable
-  fill(0, 190, 180);
-  circle (circleX, circleY, 100);
-  // draggbale
-  fill(200, 0, 20);
-  rect(rectX, rectY, 100);
-
+  this.shapes[i].x = this.shapes[i].startX;
+  this.shapes[i].y = this.shapes[i].startY;
+  this.shapes[i].matched = false;
 }
 
-function mousePressed () {
-  if (!circleMatched && dist(mouseX, mouseY, circleX, circleY) < 50) {
-    selected = "circle";
-    offsetX = mouseX - circleX;
-    offsetY = mouseY - circleY;
-  } 
-  else if (
-    !rectMatched &&
-    mouseX >= rectX && mouseX <= rectX + 100 &&
-    mouseY >= rectY && mouseY <= rectY + 100
-  ) {
-    selected = "rect";
-    offsetX = mouseX - rectX;
-    offsetY = mouseY - rectY;
-  }
-}
-function mouseDragged() {
-  if (selected === "circle") {
-    circleX = mouseX - offsetX;
-    circleY = mouseY - offsetY;
-  } else if (selected === "rect") {
-    rectX = mouseX - offsetX;
-    rectY = mouseY - offsetY;
-  }
-}
-function mouseReleased () {
-  
-  if (selected === "circle") {
-    if (dist(circleX, circleY, 1000, 100) < 60) {
-      circleX = 1000;
-      circleY = 100;
-      circleMatched = true;
-    } else {
-      circleX = circleStartX;
-      circleY = circleStartY;
+this.selected = -1;
+this.offsetX = 0;
+this.offsetY = 0;
+
+    for (let shape of this.shapes) {
+      shape.x = shape.startX;
+      shape.y = shape.startY;
+      shape.matched = false;
     }
-  } 
-  else if (selected === "rect") {
-    if (dist(rectX, rectY, 950, 200) < 60) {
-      rectX = 950;
-      rectY = 200;
-      rectMatched = true;
-    } else {
-      rectX = rectStartX;
-      rectY = rectStartY;
+
+    this.selected = -1;
+    this.offsetX = 0;
+    this.offsetY = 0;
+  }
+
+  drawShape(type, color, x, y) {
+    push();
+    translate(x, y);
+    stroke(0);
+    strokeWeight(5);
+    fill(color);
+
+    if (type === "circle") {
+      circle(0, 0, 200);
+    }
+
+    if (type === "rect") {
+      rect(-100, -100, 200, 200);
+    }
+
+    if (type === "triangle") {
+      triangle(-100, 100, 100, 100, 0, -100);
+    }
+
+    if (type === "star") {
+      beginShape();
+      for (let i = 0; i < 10; i++) {
+        let a = -HALF_PI + i * PI / 5;
+        let r = i % 2 === 0 ? 100 : 45;
+        vertex(cos(a) * r, sin(a) * r);
+      }
+      endShape(CLOSE);
+    }
+
+    if (type === "diamond") {
+      quad(0, -100, 100, 0, 0, 100, -100, 0);
+    }
+
+    if (type === "hexagon") {
+      beginShape();
+      for (let i = 0; i < 6; i++) {
+        let a = i * TWO_PI / 6;
+        vertex(cos(a) * 100, sin(a) * 100);
+      }
+      endShape(CLOSE);
+    }
+
+    pop();
+  }
+
+  draw() {
+    background(245);
+    strokeWeight(10);
+
+    // Divider
+    line(960, 0, 960, 1920);
+
+    // Target shapes
+    for (let shape of this.shapes) {
+      this.drawShape(
+        shape.type,
+        220,
+        shape.targetX,
+        shape.targetY
+      );
+    }
+
+    // Draggable shapes
+    for (let shape of this.shapes) {
+      this.drawShape(
+        shape.type,
+        shape.color,
+        shape.x,
+        shape.y
+      );
     }
   }
 
-  selected = "";
+  mousePressed() {
+    for (let i = this.shapes.length - 1; i >= 0; i--) {
+      let shape = this.shapes[i];
+
+      if (shape.matched) continue;
+
+      if (
+        mouseX >= shape.x - 60 &&
+        mouseX <= shape.x + 60 &&
+        mouseY >= shape.y - 60 &&
+        mouseY <= shape.y + 60
+      ) {
+        this.selected = i;
+        this.offsetX = mouseX - shape.x;
+        this.offsetY = mouseY - shape.y;
+        break;
+      }
+    }
+  }
+
+  mouseDragged() {
+    if (this.selected !== -1) {
+      let shape = this.shapes[this.selected];
+
+      shape.x = mouseX - this.offsetX;
+      shape.y = mouseY - this.offsetY;
+    }
+  }
+
+  mouseReleased() {
+    if (this.selected !== -1) {
+      let shape = this.shapes[this.selected];
+
+      if (
+        dist(
+          shape.x,
+          shape.y,
+          shape.targetX,
+          shape.targetY
+        ) < 60
+      ) {
+        shape.x = shape.targetX;
+        shape.y = shape.targetY;
+        shape.matched = true;
+      } else {
+        shape.x = shape.startX;
+        shape.y = shape.startY;
+      }
+    }
+
+    this.selected = -1;
+  }
 }
+
+
+// Original p5.js functions
+
+
+
+// function setup() {
+  // createCanvas(1080, 1920);
+  // game = new MatchupGameRunner();
+// }
+
+// function draw() {
+  // game.draw();
+// }
+
+// function mousePressed() {
+  // // game.mousePressed();
+// }
+
+// function mouseDragged() {
+  // game.mouseDragged();
+// // // // // }
+
+// // // // function mouseReleased() {
+  // // // game.mouseReleased();
+// // }
