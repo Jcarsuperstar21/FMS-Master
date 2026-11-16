@@ -87,7 +87,7 @@ export class LetterTraceRunner {
         tint(255, 128);
         switch (this.currentLetter) {
             case 'A':
-                image(this.imgA, width/2, height/2);
+                image(this.imgA, width/2, height/2, (this.imgA.width / 1875) * width, (this.imgA.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -100,7 +100,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (850/1875), height * (565/969));
                 break;
             case 'B':
-                image(this.imgB, width/2, height/2);
+                image(this.imgB, width/2, height/2, (this.imgB.width / 1875) * width, (this.imgB.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -113,7 +113,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (790/1875), height * (650/969));
                 break;
             case 'C':
-                image(this.imgC, width/2, height/2);
+                image(this.imgC, width/2, height/2, (this.imgC.width / 1875) * width, (this.imgC.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -125,7 +125,7 @@ export class LetterTraceRunner {
                 this.hitBox4.updatePosition(width * (1090/1875), height * (595/969));
                 break;
             case 'D':
-                image(this.imgD, width/2, height/2);
+                image(this.imgD, width/2, height/2, (this.imgD.width / 1875) * width, (this.imgD.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -138,7 +138,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (855/1875), height * (300/969));
                 break;
             case 'E':
-                image(this.imgE, width/2, height/2);
+                image(this.imgE, width/2, height/2, (this.imgE.width / 1875) * width, (this.imgE.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -151,7 +151,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1040/1875), height * (666/969));
                 break;
             case 'F':
-                image(this.imgF, width/2, height/2);
+                image(this.imgF, width/2, height/2, (this.imgF.width / 1875) * width, (this.imgF.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -164,7 +164,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (815/1875), height * (655/969));
                 break;
             case 'G':
-                image(this.imgG, width/2, height/2);
+                image(this.imgG, width/2, height/2, (this.imgG.width / 1875) * width, (this.imgG.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -177,7 +177,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (980/1875), height * (485/969));
                 break;
             case 'H':
-                image(this.imgH, width/2, height/2);
+                image(this.imgH, width/2, height/2, (this.imgH.width / 1875) * width, (this.imgH.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -190,7 +190,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1088/1875), height * (666/969));
                 break;
             case 'I':
-                image(this.imgI, width/2, height/2);
+                image(this.imgI, width/2, height/2, (this.imgI.width / 1875) * width, (this.imgI.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -201,7 +201,7 @@ export class LetterTraceRunner {
                 this.hitBox3.updatePosition(width * (934/1875), height * (675/969));
                 break;
             case 'J':
-                image(this.imgJ, width/2, height/2);
+                image(this.imgJ, width/2, height/2, (this.imgJ.width / 1875) * width, (this.imgJ.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -213,7 +213,7 @@ export class LetterTraceRunner {
                 this.hitBox4.updatePosition(width * (815/1875), height * (592/969));
                 break;
             case 'K':
-                image(this.imgK, width/2, height/2);
+                image(this.imgK, width/2, height/2, (this.imgK.width / 1875) * width, (this.imgK.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -226,7 +226,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1072/1875), height * (669/969));
                 break;
             case 'L':
-                image(this.imgL, width/2, height/2);
+                image(this.imgL, width/2, height/2, (this.imgL.width / 1875) * width, (this.imgL.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -237,7 +237,7 @@ export class LetterTraceRunner {
                 this.hitBox3.updatePosition(width * (1066/1875), height * (670/969));
                 break;
             case 'M':
-                image(this.imgM, width/2, height/2);
+                image(this.imgM, width/2, height/2, (this.imgM.width / 1875) * width, (this.imgM.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -250,7 +250,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1105/1875), height * (669/969));
                 break;
             case 'N':
-                image(this.imgN, width/2, height/2);
+                image(this.imgN, width/2, height/2, (this.imgN.width / 1875) * width, (this.imgN.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -263,7 +263,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1092/1875), height * (300/969));
                 break;
             case 'O':
-                image(this.imgO, width/2, height/2);
+                image(this.imgO, width/2, height/2, (this.imgO.width / 1875) * width, (this.imgO.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -276,7 +276,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1114/1875), height * (545/969));
                 break;
             case 'P':
-                image(this.imgP, width/2, height/2);
+                image(this.imgP, width/2, height/2, (this.imgP.width / 1875) * width, (this.imgP.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -288,7 +288,7 @@ export class LetterTraceRunner {
                 this.hitBox4.updatePosition(width * (882/1875), height * (545/969));
                 break;
             case 'Q':
-                image(this.imgQ, width/2, height/2);
+                image(this.imgQ, width/2, height/2, (this.imgQ.width / 1875) * width, (this.imgQ.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -301,7 +301,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1114/1875), height * (662/969));
                 break;
             case 'R':
-                image(this.imgR, width/2, height/2);
+                image(this.imgR, width/2, height/2, (this.imgR.width / 1875) * width, (this.imgR.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -314,7 +314,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1076/1875), height * (675/969));
                 break;
             case 'S':
-                image(this.imgS, width/2, height/2);
+                image(this.imgS, width/2, height/2, (this.imgS.width / 1875) * width, (this.imgS.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -327,7 +327,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (819/1875), height * (638/969));
                 break;
             case 'T':
-                image(this.imgT, width/2, height/2);
+                image(this.imgT, width/2, height/2, (this.imgT.width / 1875) * width, (this.imgT.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -339,7 +339,7 @@ export class LetterTraceRunner {
                 this.hitBox4.updatePosition(width * (933/1875), height * (355/969));
                 break;
             case 'U':
-                image(this.imgU, width/2, height/2);
+                image(this.imgU, width/2, height/2, (this.imgU.width / 1875) * width, (this.imgU.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -352,7 +352,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1085/1875), height * (296/969));
                 break;
             case 'V':
-                image(this.imgV, width/2, height/2);
+                image(this.imgV, width/2, height/2, (this.imgV.width / 1875) * width, (this.imgV.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -363,7 +363,7 @@ export class LetterTraceRunner {
                 this.hitBox3.updatePosition(width * (1124/1875), height * (290/969));
                 break;
             case 'W':
-                image(this.imgW, width/2, height/2);
+                image(this.imgW, width/2, height/2, (this.imgW.width / 1875) * width, (this.imgW.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -376,7 +376,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (1197/1875), height * (296/969));
                 break;
             case 'X':
-                image(this.imgX, width/2, height/2);
+                image(this.imgX, width/2, height/2, (this.imgX.width / 1875) * width, (this.imgX.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -389,7 +389,7 @@ export class LetterTraceRunner {
                 this.hitBox5.updatePosition(width * (933/1875), height * (486/969));
                 break;
             case 'Y':
-                image(this.imgY, width/2, height/2);
+                image(this.imgY, width/2, height/2, (this.imgY.width / 1875) * width, (this.imgY.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
@@ -401,7 +401,7 @@ export class LetterTraceRunner {
                 this.hitBox4.updatePosition(width * (937/1875), height * (468/969));
                 break;
             case 'Z':
-                image(this.imgZ, width/2, height/2);
+                image(this.imgZ, width/2, height/2, (this.imgZ.width / 1875) * width, (this.imgZ.height / 969) * height);
                 this.hitBox1.setStatus(false);
                 this.hitBox2.setStatus(false);
                 this.hitBox3.setStatus(false);
