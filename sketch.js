@@ -161,9 +161,8 @@ function drawScreen3() {
 
 //Pranay's section
 function drawScreen4() {
-  if (game_4_started == false) {
-    game_4_started = true;
-    arrow_game_runner.start_game();
+  if (!arrow_game_runner.game_playing) {
+    arrow_game_runner.draw_start_menu();
   }
   else if (!arrow_game_runner.game_is_over()) {
     arrow_game_runner.play_game();
@@ -193,13 +192,22 @@ function keyPressed() {
 
 function mouseClicked() {
   //Logic for Pranay's Game (#4)
-  if (game_4_started && arrow_game_runner.game_is_over()) {
+  if (arrow_game_runner.start_button.mouse_is_hovering() && arrow_game_runner.on_start_menu) {
+      if (arrow_game_runner.on_start_menu) {
+      game_4_started = true;
+      arrow_game_runner.on_start_menu = false;
+      arrow_game_runner.game_playing = true;
+    }
+  }
+  else if (arrow_game_runner.game_is_over() && game_4_started) {
     if (arrow_game_runner.retry_button.mouse_is_hovering()) {
-      arrow_game_runner.start_game();
+      arrow_game_runner.game_playing = false;
     }
     if (arrow_game_runner.menu_button.mouse_is_hovering()) {
       currentScreen = "home";
       game_4_started = false;
+      arrow_game_runner.on_start_menu = false;
+      arrow_game_runner.game_playing = false;
     }
   }
 }
