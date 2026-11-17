@@ -4,8 +4,11 @@
   Calculate the distance and display the appropriate message
   Show the end results, menu button, and retry button
   NOTE: All of these functions are effectively being called inside a while loop (once per frame)
-*/
 
+  
+  TODO
+    -misses only count literally one miss for the entirety of the game
+*/
 export class ArrowGameRunner {
   constructor(img) {
     this.arrow_img = img;
@@ -23,6 +26,7 @@ export class ArrowGameRunner {
       new DownArrow('red', 14 * windowWidth / 16, 10 * windowHeight / 16, this.arrow_img),
     ];
 
+    this.start_button = new CanvasButton(windowWidth / 2 - 50, 9 * windowHeight / 16, 100, 50, "Start");
     this.retry_button = new CanvasButton(windowWidth / 2 - 200, 3 * windowHeight / 4, 200, 100, "Retry");
     this.menu_button  = new CanvasButton(windowWidth / 2, 3 * windowHeight / 4, 200, 100, "Menu");
 
@@ -75,7 +79,9 @@ export class ArrowGameRunner {
     */
 
     //Below instance variables are all state-trackers concerning messages, the note list, and statistics
-    this.game_over  = false;
+    this.on_start_menu = false;
+    this.game_over     = false;
+    this.game_playing  = false;
     this.arrow_indx = 0; //iterator of arrow_list to track each arrow
     this.msg_timer  = 0;
     this.current_msg = "";
@@ -88,10 +94,24 @@ export class ArrowGameRunner {
     ];
   }
 
-  start_game() {
-    background(135, 206, 235);
+  draw_start_menu() {
     this.init();
+    this.on_start_menu = true;
 
+    background(135, 206, 235);
+    
+    push();
+    textAlign(CENTER, CENTER);
+    fill("black");
+    
+    // textSize(64);
+    // text("Arrow Rhythm Game", windowWidth / 2, windowHeight / 4);
+    
+    textSize(32);
+    text("Instructions:\nArrows will rise to the end-zone at the top of the screen.\nPress the matching key when they get to the zone!", windowWidth / 2, windowHeight / 2 - 50);
+    this.start_button.show();
+    pop();
+    
   }
 
   display_hit_or_miss(msg) {
@@ -111,7 +131,8 @@ export class ArrowGameRunner {
   }
 
   play_game() {
-    
+    this.game_playing = true;
+
     push();
     //1: background is the bottommost layer
     background(135, 206, 235);
