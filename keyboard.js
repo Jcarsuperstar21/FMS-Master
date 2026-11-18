@@ -1,10 +1,13 @@
 export class Keyboard {
 
   constructor() {
-    this.inputColors = ["lightpink", "lightblue", "red", "yellow", "brown", "grey", "maroon", "blue", "purple", "orange"];
+    this.inputColors = ["lightpink", "navy", "turquoise", "yellow", "darkbrown", "magenta", "maroon", "blue", "purple", "orange"];
 
+    this.resetPattern();
+  }
+
+  resetPattern() {
     this.outputColors = Array.from({length: 5}, () => random(this.inputColors));
-
     this.currentOutputIndex = 0;
   }
 
@@ -26,33 +29,53 @@ export class Keyboard {
     strokeWeight(3);
     fill(this.inputColors[0]);
     rect(130, 300, 110, 110, 20);
+    textSize(32);
+    text("0", 1085, 505);
 
     fill(this.inputColors[1]);
     rect(355, 300, 110, 110, 20);
+    textSize(32);
+    text("1", 185, 355);
 
     fill(this.inputColors[2]);
     rect(580, 300, 110, 110, 20);
+    textSize(32);
+    text("2", 410, 355);
 
     fill(this.inputColors[3]);
     rect(805, 300, 110, 110, 20);
+    textSize(32);
+    text("3", 635, 355);
 
     fill(this.inputColors[4]);
     rect(1030, 300, 110, 110, 20);
+    textSize(32);
+    text("4", 860, 355);
 
     fill(this.inputColors[5]);
     rect(130, 450, 110, 110, 20);
+    textSize(32);
+    text("5", 1085, 355);
 
     fill(this.inputColors[6]);
     rect(355, 450, 110, 110, 20);
+    textSize(32);
+    text("6", 185, 505);
 
     fill(this.inputColors[7]);
     rect(580, 450, 110, 110, 20);
+    textSize(32);
+    text("7", 410, 505);
 
     fill(this.inputColors[8]);
     rect(805, 450, 110, 110, 20);
+    textSize(32);
+    text("8", 635, 505);
 
     fill(this.inputColors[9]);
     rect(1030, 450, 110, 110, 20);
+    textSize(32);
+    text("9", 860, 505);
 
     //Extra keys of the keyboard (3 keys)
     fill("grey");
@@ -76,44 +99,32 @@ export class Keyboard {
 
     fill(this.outputColors[4]);
     rect(943, 80, 130, 130, 20);
+
+    fill("black");
+    textSize(32);
+    text("Match the Colors, Press the Keys in Order!", 635, 25);
+
   }
   handleKeyPress(pressedKey) {
+    console.log(`Key pressed: ${pressedKey}`);
       if (!/^[0-9]$/.test(pressedKey)) {
         return;
       }
 
       const inputIndex = pressedKey === "0" ? 9 : Number(pressedKey) - 1;
 
-      if (this.currentOutputIndex < this.outputColors.length &&
-        this.inputColors[inputIndex] === this.outputColors[this.currentOutputIndex]) { this.currentOutputIndex++;
+      if (this.inputColors[inputIndex] !== this.outputColors[this.currentOutputIndex]) {
+        return;
+      }
+      this.currentOutputIndex++;
+      if (this.currentOutputIndex === this.outputColors.length) {
+        this.resetPattern();
 
+        // Add completion animation or sound effect here
+        }
       }
     }
 
-  //Icons for the keys (1-10) and the extra keys (next, previous, menu)
-  // key === '1' (key 1) emoji icon
-  // key === '2' (key 2) emoji icon
-  // key === '3' (key 3) emoji icon
-  // key === '4' (key 4) emoji icon
-  // key === '5' (key 5) emoji icon
-  // key === '6' (key 6) emoji icon
-  // key === '7' (key 7) emoji icon
-  // key === '8' (key 8) emoji icon
-  // key === '9' (key 9) emoji icon
-  // key === '0' (key 10) emoji icon
+  //Detecting key presses and implementing functionality(Using if statements with true/false conditions)
 
-  //Detecting key presses and changing the color of the keys (Using "if" statements with true/false conditions)
-  // if (keyIsPressed) {
-  // Use p5.js 'key' variable to detect key presses
-  //if (key === '1') {
-  //fill("lightgreen");
-  //} else {
-  //fill("lightgrey");
-  //}
-  //if (key === '2') {
-  //fill ("red");
-
-  //Random generated combinations of icons that will be displayed on the output keys
-
-  //Add sound effects
-}
+  //Add sound effects (maybe) and/or completion animations when the user presses the correct key in the correct order/completes the pattern.
