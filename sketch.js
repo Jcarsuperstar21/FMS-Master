@@ -12,6 +12,12 @@ let game_4_started = false;
 //Pranay's stuff
 let arrow_game_runner;
 let game_4_arrow_img;
+let game_4_player_static;
+let game_4_player_up;
+let game_4_player_down;
+let game_4_player_left;
+let game_4_player_right;
+let game_4_player_fail;
 
 //Jack's stuff
 let letter_trace_runner;
@@ -43,8 +49,22 @@ let offsetY = 0;
 function preload() {
   keyboard_game_runner = new Keyboard();
   letter_trace_runner = new LetterTraceRunner();
-  game_4_arrow_img = loadImage('/arrow_game_assets/arrow_left.png');
-  arrow_game_runner = new ArrowGameRunner(game_4_arrow_img);
+  game_4_arrow_img     = loadImage('/arrow_game_assets/arrow_left.png');
+  game_4_player_static = loadImage('/arrow_game_assets/player_static.png');
+  game_4_player_up     = loadImage('/arrow_game_assets/player_up.png');
+  game_4_player_down   = loadImage('/arrow_game_assets/player_down.png');
+  game_4_player_left   = loadImage('/arrow_game_assets/player_right.png');
+  game_4_player_right  = loadImage('/arrow_game_assets/player_right.png');
+  game_4_player_fail   = loadImage('/arrow_game_assets/player_fail.png');
+  arrow_game_runner = new ArrowGameRunner(
+    [game_4_arrow_img,
+      game_4_player_static,
+      game_4_player_up,
+      game_4_player_down,
+      game_4_player_left,
+      game_4_player_right,
+      game_4_player_fail]
+  );
 }
 
 function setup() {
@@ -60,7 +80,8 @@ function draw() {
     } else if (mouseIsPressed && mouseX > width / 4 && mouseX < width * 3 / 4 && mouseY > height / 6 && mouseY < height / 6 + height / 8) {
       currentScreen = "screen1";
     } else if (mouseIsPressed && mouseX > width / 4 && mouseX < width * 3 / 4 && mouseY > height / 3 && mouseY < height / 3 + height / 8) {
-      currentScreen = "screen2";
+      // currentScreen = "screen2";
+      window.location.href = encodeURI("matchup.html");
     } else if (mouseIsPressed && mouseX > width / 4 && mouseX < width * 3 / 4 && mouseY > height / 2 && mouseY < height / 2 + height / 8) {
       currentScreen = "screen3";  
     } else if (mouseIsPressed && mouseX > width / 4 && mouseX < width * 3 / 4 && mouseY > height / 1.5 && mouseY < height / 1.5 + height / 8) {
@@ -184,7 +205,7 @@ function keyPressed() {
   }
   //Logic for Gael's game (#1)
   else if (currentScreen === "screen1") {
-    keyboard_game_runner.handleKeyPress(key);
+    letter_trace_runner.handleKeyPress(keyCode);
   }
 
 
