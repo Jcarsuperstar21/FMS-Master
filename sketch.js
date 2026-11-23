@@ -205,7 +205,7 @@ function keyPressed() {
   }
   //Logic for Gael's game (#1)
   else if (currentScreen === "screen1") {
-    letter_trace_runner.handleKeyPress(keyCode);
+    keyboard_game_runner.handleKeyPress(key);
   }
 
 
