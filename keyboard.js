@@ -116,6 +116,7 @@ export class Keyboard {
       if (this.inputColors[inputIndex] !== this.outputColors[this.currentOutputIndex]) {
         return;
       }
+      console.log('correct');
       this.currentOutputIndex++;
       if (this.currentOutputIndex === this.outputColors.length) {
         this.resetPattern();
